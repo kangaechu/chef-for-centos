@@ -34,7 +34,7 @@ Following will build your CentOS sever environment in a few steps.
 
 1. Clone this git repository
 
-        # git clone https://github.com/kohkimakimoto/chef-for-centos.git /var/chef
+        # git clone https://github.com/kangaechu/chef-for-centos.git /var/chef
 
 1. Run chef-solo using following command
 
