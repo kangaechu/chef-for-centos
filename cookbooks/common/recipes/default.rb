@@ -6,7 +6,7 @@
 # yum update
 #
 execute "yum update" do
-  command "yum update"
+  command "yum -y update"
 end
 
 #
@@ -14,7 +14,7 @@ end
 #
 
 execute "yum groupinstall X Window System" do
-  command "yum groupinstall X Window System"
+  command "yum -y groupinstall X Window System"
 end
 
 package "wget" do
