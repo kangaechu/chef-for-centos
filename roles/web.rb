@@ -1,7 +1,9 @@
 name "web"
 description ""
 run_list(
-  "role[base]"
+  "role[base]",
+  "recipe[java]",
+  "recipe[jenkins]"
 )
 
 default_attributes({

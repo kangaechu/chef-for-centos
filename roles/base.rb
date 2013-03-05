@@ -1,13 +1,7 @@
 name "base"
 description ""
 run_list(
-  "recipe[common]",
-  "recipe[selinux]",
-  "recipe[yum]",
-  "recipe[iptables]",
-  "recipe[httpd]",
-  "recipe[php]",
-  "recipe[mysql]"
+  "recipe[common]"
 )
 
 default_attributes({
