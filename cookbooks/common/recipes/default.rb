@@ -3,32 +3,28 @@
 #
 
 #
+# yum update
+#
+execute "yum update" do
+  command "yum update"
+end
+
+#
 # Package install
 #
+
+execute "yum groupinstall X Window System" do
+  command "yum groupinstall X Window System"
+end
 
 package "wget" do
   action :install
   not_if "rpm -q wget"
 end
 
-package "bind-utils" do
-  action :install
-  not_if "rpm -q bind-utils"
-end
-
-package "traceroute" do
-  action :install
-  not_if "rpm -q traceroute"
-end
-
 package "man" do
   action :install
   not_if "rpm -q man"
-end
-
-package "crontabs" do
-  action :install
-  not_if "rpm -q crontabs"
 end
 
 package "gcc" do
@@ -41,25 +37,13 @@ package "make" do
   not_if "rpm -q make"
 end
 
-package "gettext" do
+package "vim" do
   action :install
-  not_if "rpm -q gettext"
+  not_if "rpm -q vim"
 end
 
-package "rpm-build" do
+package "perl" do
   action :install
-  not_if "rpm -q rpm-build"
+  not_if "rpm -q perl"
 end
 
-package "tcpdump" do
-  action :install
-  not_if "rpm -q tcpdump"
-end
-
-
-#
-# chkconfig
-#
-execute "chkconfig crond on" do
-  command "chkconfig crond on"
-end
