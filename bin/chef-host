@@ -19,6 +19,7 @@ RUN_LIST_FILE="/tmp/chef_solo_run_list.${FILE_DATE}.json"
 #
 cd ${REPO_DIR}
 git pull
+git submodule update
 
 #
 # Generate run_list json file using hostname. and then execute chef-solo command.
