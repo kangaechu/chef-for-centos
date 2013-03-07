@@ -27,6 +27,11 @@ package "man" do
   not_if "rpm -q man"
 end
 
+package "unzip" do
+  action :install
+  not_if "rpm -q unzip"
+end
+
 package "gcc" do
   action :install
   not_if "rpm -q gcc"
