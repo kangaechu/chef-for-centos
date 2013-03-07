@@ -47,6 +47,11 @@ package "perl" do
   not_if "rpm -q perl"
 end
 
+package "firefox" do
+  action :install
+  not_if "rpm -q firefox"
+end
+
 package "kernel-devel" do
   action :install
   not_if "rpm -q kernel-devel"
