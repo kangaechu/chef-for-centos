@@ -13,8 +13,8 @@ end
 # Package install
 #
 
-execute "yum groupinstall X Window System" do
-  command "yum -y groupinstall X Window System"
+execute "yum groupinstall Desktop" do
+  command "yum -y groupinstall Desktop"
 end
 
 package "wget" do
@@ -45,5 +45,10 @@ end
 package "perl" do
   action :install
   not_if "rpm -q perl"
+end
+
+package "kernel-devel" do
+  action :install
+  not_if "rpm -q kernel-devel"
 end
 
