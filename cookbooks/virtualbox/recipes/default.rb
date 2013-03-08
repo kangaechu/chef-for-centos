@@ -30,8 +30,8 @@ bash "install Virtualbox Guest Additions" do
   user "root"
   cwd "/tmp"
   code <<-EOH
-  FILENAME="VBoxGuestAdditions_${VERSION}"
-  wget -c http://download.virtualbox.org/virtualbox/${VERSION}/${FILENAME}.iso -O ${FILENAME}.iso
+  FILENAME="VBoxGuestAdditions_#{versionServer}"
+  wget -c http://download.virtualbox.org/virtualbox/${versionServer}/${FILENAME}.iso -O ${FILENAME}.iso
   mkdir -p /mnt/${FILENAME}
   mount ${FILENAME}.iso -o loop /mnt/${FILENAME}
   sh /mnt/${FILENAME}/VBoxLinuxAdditions.run --nox11
