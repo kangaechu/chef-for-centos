@@ -13,10 +13,6 @@ end
 # Package install
 #
 
-execute "yum groupinstall Desktop" do
-  command "yum -y groupinstall Desktop"
-end
-
 package "wget" do
   action :install
   not_if "rpm -q wget"
@@ -41,9 +37,3 @@ package "perl" do
   action :install
   not_if "rpm -q perl"
 end
-
-package "firefox" do
-  action :install
-  not_if "rpm -q firefox"
-end
-
