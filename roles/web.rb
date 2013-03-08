@@ -3,7 +3,7 @@ description ""
 run_list(
   "role[base]",
   "recipe[Desktop]",
-  "recipe[Virtualbox]",
+  "recipe[virtualbox]",
   "recipe[java]",
   "recipe[jenkins]"
 )
