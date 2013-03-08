@@ -40,5 +40,5 @@ bash "install Virtualbox Guest Additions" do
   rmdir /mnt/${FILENAME}
   rm -rf ${FILENAME}.iso
   EOH
-  not_if {File.exists?("/opt/VBoxGuestAdditions_" + #{versionServer})}
+  not_if {File.exists?("/opt/VBoxGuestAdditions-" + versionServer + "/bin")}
 end
