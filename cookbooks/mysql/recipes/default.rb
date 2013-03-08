@@ -6,15 +6,8 @@
 # Package install
 #
 execute "yum install mysql" do
-  command "yum install -y --enablerepo=remi,epel mysql mysql-server mysql-libs"
+  command "yum install -y mysql mysql-server mysql-libs"
   not_if "rpm -q mysql"
-end
-
-#
-# chkconfig
-#
-execute "chkconfig mysqld on" do
-  command "chkconfig mysqld on"
 end
 
 #
@@ -32,8 +25,6 @@ end
 # Command
 #
 service "mysqld" do
-  stop_command    "/etc/init.d/mysqld stop"
-  start_command   "/etc/init.d/mysqld start"
-  restart_command "/etc/init.d/mysqld restart"
-  action :nothing
+  supports :status => true, :restart => true, :reload => true
+  action [:enable, :start]
 end
