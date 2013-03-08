@@ -32,16 +32,6 @@ package "unzip" do
   not_if "rpm -q unzip"
 end
 
-package "gcc" do
-  action :install
-  not_if "rpm -q gcc"
-end
-
-package "make" do
-  action :install
-  not_if "rpm -q make"
-end
-
 package "vim" do
   action :install
   not_if "rpm -q vim"
@@ -55,10 +45,5 @@ end
 package "firefox" do
   action :install
   not_if "rpm -q firefox"
-end
-
-package "kernel-devel" do
-  action :install
-  not_if "rpm -q kernel-devel"
 end
 
