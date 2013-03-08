@@ -37,3 +37,8 @@ service "jenkins" do
   restart_command "/etc/init.d/jenkins graceful"
   action :start
 end
+
+#
+# accept Jenkins port 8080
+#
+iptables_rule "jenkins"
