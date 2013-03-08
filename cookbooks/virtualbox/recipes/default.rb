@@ -31,9 +31,7 @@ bash "install Virtualbox Guest Additions" do
   cwd "/tmp"
   flags "-x -e"
   code <<-EOH
-  echo "Virtualbox Latest Version : #{versionServer}"
   FILENAME="VBoxGuestAdditions_#{versionServer}"
-  echo "filename : ${FILENAME}"
   wget -q -c http://download.virtualbox.org/virtualbox/#{versionServer}/${FILENAME}.iso -O ${FILENAME}.iso
   mkdir -p /mnt/${FILENAME}
   mount ${FILENAME}.iso -o loop /mnt/${FILENAME}
@@ -42,5 +40,5 @@ bash "install Virtualbox Guest Additions" do
   rmdir /mnt/${FILENAME}
   rm -rf ${FILENAME}.iso
   EOH
-  not_if {File.exists?("/opt/VBoxGuestAdditions_" + versionServer)}
+  not_if {File.exists?("/opt/VBoxGuestAdditions_" + #{versionServer})}
 end
