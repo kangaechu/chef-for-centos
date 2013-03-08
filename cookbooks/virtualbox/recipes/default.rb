@@ -24,7 +24,7 @@ end
 
 # get latest Virtualbox Guest Additions version
 
-versionServer=`wget -q -O - http://download.virtualbox.org/virtualbox/LATEST.TXT`
+versionServer=`wget -q -O - http://download.virtualbox.org/virtualbox/LATEST.TXT`.strip
 
 bash "install Virtualbox Guest Additions" do
   user "root"
