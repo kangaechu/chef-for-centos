@@ -24,14 +24,14 @@ end
 
 # get latest Virtualbox Guest Additions version
 
-versionServer = `wget -q -O - http://download.virtualbox.org/virtualbox/LATEST.TXT`
+versionServer=`wget -q -O - http://download.virtualbox.org/virtualbox/LATEST.TXT`
 
 bash "install Virtualbox Guest Additions" do
   user "root"
   cwd "/tmp"
   code <<-EOH
   FILENAME="VBoxGuestAdditions_#{versionServer}"
-  wget -c http://download.virtualbox.org/virtualbox/${versionServer}/${FILENAME}.iso -O ${FILENAME}.iso
+  wget -c http://download.virtualbox.org/virtualbox/#{versionServer}/${FILENAME}.iso -O ${FILENAME}.iso
   mkdir -p /mnt/${FILENAME}
   mount ${FILENAME}.iso -o loop /mnt/${FILENAME}
   sh /mnt/${FILENAME}/VBoxLinuxAdditions.run --nox11
