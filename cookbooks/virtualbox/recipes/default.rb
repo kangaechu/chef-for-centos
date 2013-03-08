@@ -29,6 +29,7 @@ versionServer=`wget -q -O - http://download.virtualbox.org/virtualbox/LATEST.TXT
 bash "install Virtualbox Guest Additions" do
   user "root"
   cwd "/tmp"
+  flags "-x -e"
   code <<-EOH
   echo "Virtualbox Latest Version : #{versionServer}"
   FILENAME="VBoxGuestAdditions_#{versionServer}"
@@ -38,6 +39,7 @@ bash "install Virtualbox Guest Additions" do
   mount ${FILENAME}.iso -o loop /mnt/${FILENAME}
   sh /mnt/${FILENAME}/VBoxLinuxAdditions.run --nox11
   umount /mnt/${FILENAME}
+  rmdir /mnt/${FILENAME}
   rm -rf ${FILENAME}.iso
   EOH
   not_if {File.exists?("/opt/VBoxGuestAdditions_" + versionServer)}
