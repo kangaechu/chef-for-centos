@@ -38,5 +38,5 @@ bash "install Virtualbox Guest Additions" do
   umount /mnt/${FILENAME}
   rm -rf ${FILENAME}.iso
   EOH
-  not_if {File.Exists?("/opt/VBoxGuestAdditions_" + versionServer)}
+  not_if {File.exists?("/opt/VBoxGuestAdditions_" + versionServer)}
 end
