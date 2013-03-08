@@ -3,6 +3,6 @@
 # See http://docs.opscode.com/config_rb_solo.html
 #
 
-log_level :info
+log_level :debug
 cookbook_path ["/var/chef/cookbooks"]
 role_path "/var/chef/roles"
