@@ -39,12 +39,12 @@ bash "install Virtualbox Guest Additions" do
   cwd "/tmp"
   flags "-x -e"
   code <<-EOH
-  mkdir -p /mnt/${FILENAME}
-  mount ${FILENAME}.iso -o loop /mnt/${FILENAME}
-  sh /mnt/${FILENAME}/VBoxLinuxAdditions.run --nox11
-  umount /mnt/${FILENAME}
-  rmdir /mnt/${FILENAME}
-  rm -rf ${FILENAME}.iso
+  mkdir -p /mnt/#{filename}
+  mount #{filename}.iso -o loop /mnt/#{filename}
+  sh /mnt/#{filename}/VBoxLinuxAdditions.run --nox11
+  umount /mnt/#{filename}
+  rmdir /mnt/#{filename}
+  rm -rf #{filename}.iso
   EOH
   not_if {! File.exists?("#{Chef::Config[:file_cache_path]}/#{filename}.iso") or
           File.exists?("/opt/VBoxGuestAdditions-" + versionServer + "/bin")}
