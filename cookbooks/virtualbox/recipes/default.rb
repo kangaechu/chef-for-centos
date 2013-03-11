@@ -22,17 +22,23 @@ package "kernel-devel" do
   not_if "rpm -q kernel-devel"
 end
 
+
 # get latest Virtualbox Guest Additions version
 
-versionServer=`wget -q -O - http://download.virtualbox.org/virtualbox/LATEST.TXT`.strip
+versionServer = `curl http://download.virtualbox.org/virtualbox/LATEST.TXT`.strip
+filename = "VBoxGuestAdditions_#{versionServer}"
+
+remote_file "#{Chef::Config[:file_cache_path]}/#{filename}.iso" do
+  source "http://download.virtualbox.org/virtualbox/#{versionServer}/#{filename}.iso"
+  not_if {File.exists?("#{Chef::Config[:file_cache_path]}/#{filename}.iso") or
+          File.exists?("/opt/VBoxGuestAdditions-" + versionServer + "/bin")}
+end
 
 bash "install Virtualbox Guest Additions" do
   user "root"
   cwd "/tmp"
   flags "-x -e"
   code <<-EOH
-  FILENAME="VBoxGuestAdditions_#{versionServer}"
-  wget -q -c http://download.virtualbox.org/virtualbox/#{versionServer}/${FILENAME}.iso -O ${FILENAME}.iso
   mkdir -p /mnt/${FILENAME}
   mount ${FILENAME}.iso -o loop /mnt/${FILENAME}
   sh /mnt/${FILENAME}/VBoxLinuxAdditions.run --nox11
@@ -40,5 +46,6 @@ bash "install Virtualbox Guest Additions" do
   rmdir /mnt/${FILENAME}
   rm -rf ${FILENAME}.iso
   EOH
-  not_if {File.exists?("/opt/VBoxGuestAdditions-" + versionServer + "/bin")}
+  not_if {! File.exists?("#{Chef::Config[:file_cache_path]}/#{filename}.iso") or
+          File.exists?("/opt/VBoxGuestAdditions-" + versionServer + "/bin")}
 end
