@@ -4,3 +4,6 @@
 [submodule "cookbooks/iptables"]
 	path = cookbooks/iptables
 	url = https://github.com/kangaechu/iptables.git
+[submodule "cookbooks/tomcat"]
+	path = cookbooks/tomcat
+	url = https://github.com/kangaechu/tomcat.git
