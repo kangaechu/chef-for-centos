@@ -4,9 +4,10 @@ run_list(
   "role[base]",
 #  "recipe[Desktop]",
   "recipe[virtualbox]",
-  "recipe[mysql]"
   "recipe[java]",
-#  "recipe[jenkins]"
+  "recipe[mysql]",
+  "recipe[tomcat]",
+  "recipe[wl]"
 )
 
 default_attributes({
