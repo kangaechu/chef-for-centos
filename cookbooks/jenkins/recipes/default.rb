@@ -38,7 +38,5 @@ service "jenkins" do
   action :start
 end
 
-#
-# accept Jenkins port 8080
-#
+# open iptables port
 iptables_rule "jenkins"
