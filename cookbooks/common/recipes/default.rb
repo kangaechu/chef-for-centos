@@ -37,8 +37,3 @@ package "perl" do
   action :install
   not_if "rpm -q perl"
 end
-
-#
-# open iptables port
-#
-#iptables_rule "ssh"
