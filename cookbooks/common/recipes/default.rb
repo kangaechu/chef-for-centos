@@ -28,12 +28,17 @@ package "unzip" do
   not_if "rpm -q unzip"
 end
 
-package "vim" do
+package "vim-enhanced" do
   action :install
-  not_if "rpm -q vim"
+  not_if "rpm -q vim-enhanced"
 end
 
 package "perl" do
   action :install
   not_if "rpm -q perl"
 end
+
+#
+# open iptables port
+#
+#iptables_rule "ssh"
