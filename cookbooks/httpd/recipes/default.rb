@@ -43,3 +43,6 @@ template "/etc/httpd/conf/httpd.conf" do
   mode "0664"
   notifies :restart, "service[httpd]"
 end
+
+# open iptables port
+iptables_rule "httpd"
