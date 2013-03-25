@@ -13,7 +13,9 @@ run_list(
 
 default_attributes({
   :role  => "web",
+})
 
+override_attributes({
   # JavaでOracle JDKをインターネットから自動ダウンロードする
   :java => {
   	"install_flabor" => "oracle",
