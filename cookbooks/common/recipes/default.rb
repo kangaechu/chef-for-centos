@@ -1,39 +1,28 @@
 #
-# = Linux common packages
+# Cookbook Name:: common
+# Recipe:: default
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 #
 
-#
 # yum update
-#
 execute "yum update" do
   command "yum -y update"
 end
 
-#
 # Package install
-#
-
-package "wget" do
-  action :install
-  not_if "rpm -q wget"
-end
-
-package "man" do
-  action :install
-  not_if "rpm -q man"
-end
-
-package "unzip" do
-  action :install
-  not_if "rpm -q unzip"
-end
-
-package "vim-enhanced" do
-  action :install
-  not_if "rpm -q vim-enhanced"
-end
-
-package "perl" do
-  action :install
-  not_if "rpm -q perl"
+%w{wget man unzip vim-enhanced perl}.each do |package_name|
+  package package_name do
+    action :install
+  end
 end

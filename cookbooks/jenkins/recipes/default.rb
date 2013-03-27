@@ -1,12 +1,21 @@
 #
-# = Jenkins リポジトリの追加 + パッケージインストール
+# Cookbook Name:: jenkins
+# Recipe:: default
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 #
 
-#
-# Package install
-#
-# jenkins
-bash "jenkins-key" do
+bash "add-jenkins-repository-key" do
   user "root"
   cwd "/tmp"
   code <<-EOH
@@ -18,25 +27,13 @@ end
 
 package "jenkins" do
   action :install
-  not_if "rpm -q jenkins"
 end
 
-#
-# chkconfig
-#
-execute "chkconfig jenkins on" do
-  command "chkconfig jenkins on"
-end
-
-#
-# command
-#
 service "jenkins" do
   stop_command    "/etc/init.d/jenkins stop"
   start_command   "/etc/init.d/jenkins start"
   restart_command "/etc/init.d/jenkins graceful"
-  action :start
+  action [:enable :start]
 end
 
-# open iptables port
 iptables_rule "jenkins"
