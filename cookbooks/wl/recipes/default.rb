@@ -1,22 +1,25 @@
 #
-# = Worklight Server
+# Cookbook Name:: IBM Worklight Server
+# Recipe:: default
 #
-
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
 #
-# Package install
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 #
 
 filenameInstMgr = "ENT_DEPLOY_1.6_LINUX_X86_64.zip"
-filenameWLServer = "IM_Rep_Worklight_Server_wee_5.0.5.zip"
-
-#
-# Package install
-#
-# install required packages
+filenameWLServer = "IM_Rep_Worklight_Server_wee_5.0.6.zip"
 
 package "unzip" do
   action :install
-  not_if "rpm -q unzip"
 end
 
 bash "Install Installation Manager" do
@@ -51,7 +54,7 @@ end
 bash "Create Worklight Databases" do
   user "root"
   cwd "/tmp"
-  flags "-x -e"
+  flags "-x"
   code <<-EOH
     mysql -u root < /tmp/createdb-mysql.sql
     rm -f /tmp/createdb-mysql.sql
@@ -59,15 +62,13 @@ bash "Create Worklight Databases" do
   not_if {File.exists?("/opt/IBM/Worklight")}
 end
 
-
-
 bash "Install Worklight Server" do
   user "root"
   cwd "/tmp"
   flags "-x -e"
   code <<-EOH
     INSTDATE=`date "+%Y%m%d-%H%M"`
-    cp #{Chef::Config[:file_cache_path]}/#{node[:wl][:mysql][:driver]} /tmp
+    cp -f #{Chef::Config[:file_cache_path]}/#{node[:wl][:mysql][:driver]} /tmp
     rm -rf /tmp/Worklight
     unzip -q #{Chef::Config[:file_cache_path]}/#{filenameWLServer}
     cd /opt/IBM/InstallationManager/eclipse
@@ -76,5 +77,12 @@ bash "Install Worklight Server" do
     rm /tmp/#{node[:wl][:mysql][:driver]}
   EOH
   not_if {File.exists?("/opt/IBM/Worklight")}
+end
+
+template "#{node[:wl][:tomcat][:installdir]}/conf/Catalina/localhost/worklight.xml" do
+  source "worklight.xml.erb"
+  owner "tomcat"
+  group "tomcat"
+  mode "0644"
 end
 

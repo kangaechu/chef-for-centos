@@ -14,5 +14,4 @@ default["wl"]["mysql"]["password2"] = "worklight"
 default["wl"]["mysql"]["driver"] = "mysql-connector-java-5.1.21-bin.jar"
 
 default["wl"]["appserver"]["selection"] = "tomcat"
-default["wl"]["tomcat"]["installdir"] = "/usr/local/tomcat/current"
-
+default["wl"]["tomcat"]["installdir"] = "/usr/local/tomcat/base"

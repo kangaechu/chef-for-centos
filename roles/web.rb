@@ -18,10 +18,10 @@ default_attributes({
 override_attributes({
   # JavaでOracle JDKをインターネットから自動ダウンロードする
   :java => {
-  	"install_flabor" => "oracle",
-  	"jdk_version" => "7",
+  	:install_flavor => "oracle",
+  	:jdk_version => "7",
   	:oracle => {
-  		"accept_oracle_download_terms" => true
+  		:accept_oracle_download_terms => true
   	}
   }
 })
