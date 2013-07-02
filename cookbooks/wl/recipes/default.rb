@@ -15,7 +15,7 @@
 # limitations under the License.
 #
 
-filenameInstMgr = "ENT_DEPLOY_1.6_LINUX_X86_64.zip"
+filenameInstMgr = "agent.installer.linux.gtk.x86_64_1.6.3001.20130528_1750.zip"
 filenameWLServer = "IM_Rep_Worklight_Server_wee_5.0.6.zip"
 
 package "unzip" do
@@ -28,11 +28,11 @@ bash "Install Installation Manager" do
   flags "-x -e"
   code <<-EOH
     INSTDATE=`date "+%Y%m%d-%H%M"`
-    rm -rf /tmp/EnterpriseCD-Linux-x86_64
+    rm -rf /tmp/#{filenameInstMgr.sub(".zip", "")}
     unzip -q #{Chef::Config[:file_cache_path]}/#{filenameInstMgr}
-    cd EnterpriseCD-Linux-x86_64/InstallationManager
+    cd #{filenameInstMgr.sub(".zip", "")}
     ./install --launcher.ini silent-install.ini -log /tmp/InstallationManager-${INSTDATE}.log -acceptLicense
-    rm -rf /tmp/EnterpriseCD-Linux-x86_64
+    rm -rf /tmp/#{filenameInstMgr.sub(".zip", "")}
   EOH
   not_if {File.exists?("/opt/IBM/InstallationManager")}
 end
